@@ -16,18 +16,18 @@ public class PacienteServiceImp implements PacienteService{
 
     @Override
     public Paciente registrar(Paciente paciente) {
-        return   pacienteRepository.save(paciente);
+        return pacienteRepository.save(paciente);
     }
 
     @Override
     public List<Paciente> getAll() {
-        return   pacienteRepository.findAll();
+        return pacienteRepository.findAll();
     }
 
     @Override
     public Paciente modificar(Paciente paciente) {
         if( pacienteRepository.getById(paciente.getId()) != null) {
-            return  pacienteRepository.save(paciente);
+            return pacienteRepository.save(paciente);
         }
         return null;
     }
