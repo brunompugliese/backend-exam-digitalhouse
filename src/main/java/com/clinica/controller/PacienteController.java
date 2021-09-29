@@ -3,6 +3,7 @@ package com.clinica.controller;
 import com.clinica.entity.Paciente;
 import com.clinica.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,12 +29,15 @@ public class PacienteController {
             pacienteService.registrar(paciente);
             return ResponseEntity.ok(paciente);
         }
-        return null;
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Paciente>> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(pacienteService.getById(id));
+        if (id != null) {
+            return ResponseEntity.ok(pacienteService.getById(id));
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @GetMapping("/")
@@ -47,7 +51,7 @@ public class PacienteController {
             pacienteService.borrar(id);
             return "El paciente con id " + id + " se ha eliminado con éxito ";
         }
-        return "No se encontro ningún paciente con id " + id;
+        return "No se encontró ningún paciente con id " + id;
     }
 
 }

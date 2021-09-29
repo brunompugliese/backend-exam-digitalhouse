@@ -23,12 +23,13 @@ public class Paciente {
     private String nombre;
     private String apellido;
     private String dni;
-    private Date fechaAlta;
+    private String fechaAlta;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "paciente")
-    private Domicilio domilicio;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "domicilio_id")
+    private Domicilio domicilio;
 
+   @JsonIgnore
    @OneToMany(mappedBy = "paciente")
     private Set<Turno> turnos;
 }

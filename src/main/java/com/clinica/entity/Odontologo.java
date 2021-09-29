@@ -1,5 +1,6 @@
 package com.clinica.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -27,6 +28,7 @@ public class Odontologo {
   // @OneToMany(mappedBy = "odontologo")
   // private Set<Paciente> pacientes;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "odontologo")
     private Set<Turno> turnos;
 

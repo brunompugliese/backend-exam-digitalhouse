@@ -32,7 +32,7 @@ public class DomicilioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Domicilio>> getById(@PathVariable Long id) {
+    public ResponseEntity<Optional<Domicilio>> getById(@PathVariable Long id){
         return ResponseEntity.ok(domicilioService.getById(id));
     }
 

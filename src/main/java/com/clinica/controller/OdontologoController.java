@@ -28,12 +28,15 @@ public class OdontologoController {
             odontologoService.registrar(odontologo);
             return ResponseEntity.ok(odontologo);
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Odontologo>> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(odontologoService.getById(id));
+        if (id != null) {
+            return ResponseEntity.ok(odontologoService.getById(id));
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @GetMapping("/")

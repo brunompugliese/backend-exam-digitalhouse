@@ -5,6 +5,7 @@ package com.clinica.controller;
 import com.clinica.entity.Turno;
 import com.clinica.service.TurnoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,12 +31,15 @@ public class TurnoController {
             turnoService.registrar(turno);
             return ResponseEntity.ok(turno);
         }
-        return null;
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Turno>> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(turnoService.getById(id));
+        if (id != null) {
+            return ResponseEntity.ok(turnoService.getById(id));
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @GetMapping("/")

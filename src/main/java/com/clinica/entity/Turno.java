@@ -26,7 +26,7 @@ public class Turno {
     @JoinColumn(name="paciente_id", referencedColumnName="id", nullable = false)
     private Paciente paciente;
 
-    private Date fecha;
+    private String fecha;
 }
 
 
