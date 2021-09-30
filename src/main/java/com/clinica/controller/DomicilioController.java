@@ -20,14 +20,14 @@ public class DomicilioController {
 
     @PostMapping("/")
     public ResponseEntity<Domicilio> registrar(@RequestBody Domicilio domicilio) {
-        logger.info("Registrando nuevo domicilio");
+        logger.debug("Registrando nuevo domicilio");
         return ResponseEntity.ok(domicilioService.registrar(domicilio));
     }
 
     @PutMapping("/")
     public ResponseEntity<Domicilio> modificar(@RequestBody Domicilio domicilio) {
         if (domicilioService.getById(domicilio.getId()).isPresent()) {
-            logger.info("Modificando domicilio existente");
+            logger.debug("Modificando domicilio existente");
             domicilioService.registrar(domicilio);
             return ResponseEntity.ok(domicilio);
         }
@@ -38,24 +38,24 @@ public class DomicilioController {
     @GetMapping("/{id}")
     public ResponseEntity<Domicilio> getById(@RequestBody Domicilio domicilio){
         if (domicilioService.getById(domicilio.getId()).isPresent()) {
-            logger.info("Modificando domicilio existente");
+            logger.debug("Modificando domicilio existente");
             domicilioService.registrar(domicilio);
             return ResponseEntity.ok(domicilio);
         }
-        logger.info("Falló la petición o el domicilio no existe");
+        logger.debug("Falló la petición o el domicilio no existe");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping("/")
     public ResponseEntity<List<Domicilio>> getAll() {
-        logger.info("Consultando domicilios");
+        logger.debug("Consultando domicilios");
         return ResponseEntity.ok(domicilioService.getAll());
     }
 
     @DeleteMapping("/{id}")
     public String borrar(@PathVariable Long id){
         if(domicilioService.getById(id).isPresent()){
-            logger.info("Borrando domicilio particular");
+            logger.debug("Borrando domicilio particular");
             domicilioService.borrar(id);
             return "El domicilio con id " + id +  " se ha eliminado con éxito ";
         }

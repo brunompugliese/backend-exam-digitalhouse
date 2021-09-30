@@ -2,7 +2,7 @@ $(document).ready(function() {
     $("#add_new_turno").submit(function(evt) {
         evt.preventDefault();
 
-        let formDataTurnos = {
+        let formData = {
             fecha : $("#fecha").val(),
             odontologo : {
                 id: $("#odontologo").val()  
@@ -17,7 +17,7 @@ $(document).ready(function() {
             url: '/api/turnos/',
             type: 'POST',
             contentType : "application/json",
-            data: JSON.stringify(formDataTurnos),
+            data: JSON.stringify(formData),
             dataType : 'json',
             async: false,
             cache: false,
@@ -80,7 +80,7 @@ $(document).ready(function() {
         let pathname = window.location.pathname;
         if(pathname === "/"){
             $(".nav .nav-item a:first").addClass("active");
-        } else if (pathname == "/alta-turnos.html") {
+        } else if (pathname == "/turnos.html") {
             $(".nav .nav-item a:last").addClass("active");
         }
     })();

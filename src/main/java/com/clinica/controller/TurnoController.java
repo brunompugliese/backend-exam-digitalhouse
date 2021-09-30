@@ -25,45 +25,45 @@ public class TurnoController {
 
     @PostMapping("/")
     public ResponseEntity<Turno> registrar(@RequestBody Turno turno) {
-        logger.info("Registrando turno nuevo");
+        logger.debug("Registrando turno nuevo");
         return ResponseEntity.ok(turnoService.registrar(turno));
     }
 
     @PutMapping("/")
     public ResponseEntity<Turno> modificar(@RequestBody Turno turno) {
         if (turnoService.getById(turno.getId()).isPresent()) {
-            logger.info("Modificando turno existente");
+            logger.debug("Modificando turno existente");
             turnoService.registrar(turno);
             return ResponseEntity.ok(turno);
         }
-        logger.info("Falló la petición o el turno no existe");
+        logger.debug("Falló la petición o el turno no existe");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Turno>> getById(@PathVariable Long id) {
         if (id != null) {
-            logger.info("Consultando turno particular");
+            logger.debug("Consultando turno particular");
             return ResponseEntity.ok(turnoService.getById(id));
         }
-        logger.info("Falló la petición o el turno no existe");
+        logger.debug("Falló la petición o el turno no existe");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @GetMapping("/")
     public ResponseEntity<List<Turno>> getAll() {
-        logger.info("Consultando turnos");
+        logger.debug("Consultando turnos");
         return ResponseEntity.ok(turnoService.getAll());
     }
 
     @DeleteMapping("/{id}")
     public String borrar(@PathVariable Long id){
         if(turnoService.getById(id).isPresent()){
-            logger.info("Borrando turno particular");
+            logger.debug("Borrando turno particular");
             turnoService.borrar(id);
             return "El turno con id " + id + " se ha eliminado con éxito ";
         }
-        logger.info("Falló la petición o el turno no existe");
+        logger.debug("Falló la petición o el turno no existe");
         return "No se encontro ningún turno con id " + id;
     }
 

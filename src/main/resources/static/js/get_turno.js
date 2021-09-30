@@ -6,11 +6,6 @@ $(document).ready(function(){
             success: function(response){
               $.each(response, (i, turno) => {
                 
-                let get_More_Info_Btn = '<button' +
-                                            ' id=' + '\"' + 'btn_id_' + turno.id + '\"' +
-                                            ' type="button" class="btn btn-info btn_id">' +
-                                            "Modificar" +
-                                            '</button>';
                  let delete_Btn = '<button' +
                                                             ' id=' + '\"' + 'btn_id_' + turno.id + '\"' +
                                                             ' type="button" class="btn  btn-danger ml-2">' +
@@ -19,10 +14,9 @@ $(document).ready(function(){
                 let tr_id = 'tr_' + turno.id;
                 let turnoRow = '<tr id=\"' + tr_id + "\"" + '>' +
                           '<td>' + turno.id + '</td>' +
-                          '<td class=\"td_first_name\">' + turno.nombre.toUpperCase() + '</td>' +
-                          '<td class=\"td_last_name\">' + turno.apellido + '</td>' +
-                          '<td class=\"td_matricula\">' + turno.matricula + '</td>' +
-                          '<td>' + get_More_Info_Btn + '</td>' +
+                          '<td class=\"td_fecha\">' + turno.fecha + '</td>' +
+                          '<td class=\"td_odontologo\">' + turno.odontologo.nombre + ' ' + turno.odontologo.apellido + '</td>' +
+                          '<td class=\"td_paciente\">' + turno.paciente.nombre + ' ' + turno.paciente.apellido + '</td>' +
                           '<td>' + delete_Btn + '</td>' +
                           '</tr>';
                 $('#turnoTable tbody').append(turnoRow);

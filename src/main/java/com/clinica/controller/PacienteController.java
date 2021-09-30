@@ -23,45 +23,45 @@ public class PacienteController {
 
     @PostMapping("/")
     public ResponseEntity<Paciente> registrar(@RequestBody Paciente paciente) {
-        logger.info("Registrando paciente nuevo");
+        logger.debug("Registrando paciente nuevo");
         return ResponseEntity.ok(pacienteService.registrar(paciente));
     }
 
     @PutMapping("/")
     public ResponseEntity<Paciente> modificar(@RequestBody Paciente paciente) {
         if (pacienteService.getById(paciente.getId()).isPresent()) {
-            logger.info("Modificando paciente existente");
+            logger.debug("Modificando paciente existente");
             pacienteService.registrar(paciente);
             return ResponseEntity.ok(paciente);
         }
-        logger.info("Falló la petición o el paciente no existe");
+        logger.debug("Falló la petición o el paciente no existe");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Paciente>> getById(@PathVariable Long id) {
         if (id != null) {
-            logger.info("Consultando paciente particular");
+            logger.debug("Consultando paciente particular");
             return ResponseEntity.ok(pacienteService.getById(id));
         }
-        logger.info("Falló la petición o el paciente no existe");
+        logger.debug("Falló la petición o el paciente no existe");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @GetMapping("/")
     public ResponseEntity<List<Paciente>> getAll() {
-        logger.info("Consultando pacientes");
+        logger.debug("Consultando pacientes");
         return ResponseEntity.ok(pacienteService.getAll());
     }
 
     @DeleteMapping("/{id}")
     public String borrar(@PathVariable Long id){
         if(pacienteService.getById(id).isPresent()){
-            logger.info("Borrando paciente particular");
+            logger.debug("Borrando paciente particular");
             pacienteService.borrar(id);
             return "El paciente con id " + id + " se ha eliminado con éxito ";
         }
-        logger.info("Falló la petición o el paciente no existe");
+        logger.debug("Falló la petición o el paciente no existe");
         return "No se encontró ningún paciente con id " + id;
     }
 

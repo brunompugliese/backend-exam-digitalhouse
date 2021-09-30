@@ -21,41 +21,41 @@ public class OdontologoController {
 
     @PostMapping("/")
     public ResponseEntity<Odontologo> registrar(@RequestBody Odontologo odontologo) {
-        logger.info("Registrando odontólogo nuevo");
+        logger.debug("Registrando odontólogo nuevo");
         return ResponseEntity.ok(odontologoService.registrar(odontologo));
     }
 
     @PutMapping("/")
     public ResponseEntity<Odontologo> modificar(@RequestBody Odontologo odontologo) {
         if (odontologoService.getById(odontologo.getId()).isPresent()) {
-            logger.info("Modificando odontólogo existente");
+            logger.debug("Modificando odontólogo existente");
             odontologoService.registrar(odontologo);
             return ResponseEntity.ok(odontologo);
         }
-        logger.info("Falló la petición o el odontólogo no existe");
+        logger.debug("Falló la petición o el odontólogo no existe");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Odontologo>> getById(@PathVariable Long id) {
         if (id != null) {
-            logger.info("Consultando odontólogo particular");
+            logger.debug("Consultando odontólogo particular");
             return ResponseEntity.ok(odontologoService.getById(id));
         }
-        logger.info("Falló la petición o el odontologo no existe");
+        logger.debug("Falló la petición o el odontologo no existe");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @GetMapping("/")
     public ResponseEntity<List<Odontologo>> getAll() {
-        logger.info("Consultando odontólogos");
+        logger.debug("Consultando odontólogos");
         return ResponseEntity.ok(odontologoService.getAll());
     }
 
     @DeleteMapping("/{id}")
     public String borrar(@PathVariable Long id){
         if(odontologoService.getById(id).isPresent()){
-            logger.info("Borrando odontólogo particular");
+            logger.debug("Borrando odontólogo particular");
             odontologoService.borrar(id);
             return "El odontólogo con id " + id + " se ha eliminado con éxito ";
         }
