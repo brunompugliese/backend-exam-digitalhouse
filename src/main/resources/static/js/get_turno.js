@@ -5,6 +5,7 @@ $(document).ready(function(){
             url : "/api/turnos/",
             success: function(response){
               $.each(response, (i, turno) => {
+                
                 let get_More_Info_Btn = '<button' +
                                             ' id=' + '\"' + 'btn_id_' + turno.id + '\"' +
                                             ' type="button" class="btn btn-info btn_id">' +

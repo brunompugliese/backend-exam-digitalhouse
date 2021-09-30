@@ -2,17 +2,22 @@ $(document).ready(function() {
     $("#add_new_turno").submit(function(evt) {
         evt.preventDefault();
 
-        let formData = {
-            nombre : $("#nombre").val(),
-            apellido :  $("#apellido").val(),
-            matricula: $("#matricula").val(),
+        let formDataTurnos = {
+            fecha : $("#fecha").val(),
+            odontologo : {
+                id: $("#odontologo").val()  
+            },
+            paciente: {
+                id: $("#paciente").val()   
+            }
         }
 
+        // Postear turno
         $.ajax({
             url: '/api/turnos/',
             type: 'POST',
             contentType : "application/json",
-            data: JSON.stringify(formData),
+            data: JSON.stringify(formDataTurnos),
             dataType : 'json',
             async: false,
             cache: false,
@@ -21,11 +26,10 @@ $(document).ready(function() {
                 console.log(response)
                 let successAlert = '<div class="alert alert-success alert-dismissible">' +
                     '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-                    '<strong></strong> Odontólogo registrado con éxito </div>'
+                    '<strong></strong> Turno registrado con éxito </div>'
                 $("#response").append(successAlert);
                 $("#response").css({"display": "block"});
 
-                resetUploadForm();
             },
             error: function (response) {
                 let errorAlert = '<div class="alert alert-danger alert-dismissible">' +
@@ -34,22 +38,49 @@ $(document).ready(function() {
                 $("#response").append(errorAlert);
                 $("#response").css({"display": "block"});
 
-                resetUploadForm();
             }
         });
     });
 
-    function resetUploadForm(){
-        $("#nombre").val("");
-        $("#apellido").val("");
-        $("#matricula").val("");
-    }
+    // Traer pacientes
+    $.ajax({
+        type : "GET",
+        url : "/api/pacientes/",
+        success: function(response){
+        $.each(response, (i, paciente) => {
+            let option = '<option' +
+                                        ' value=' + '\"' + paciente.id + '\">' + paciente.nombre +' '+ paciente.apellido +'</option>';
+            $('#paciente').append(option);
+        });
+        },
+        error : function(e) {
+        alert("Ocurrió un error inesperado");
+        console.log("ERROR: ", e);
+        }
+    });
+
+    // Traer odontologos
+    $.ajax({
+        type : "GET",
+        url : "/api/odontologos/",
+        success: function(response){
+        $.each(response, (i, odontologo) => {
+            let option = '<option' +
+                                        ' value=' + '\"' + odontologo.id + '\">' + odontologo.nombre +' '+ odontologo.apellido +'</option>';
+            $('#odontologo').append(option);
+        });
+        },
+        error : function(e) {
+        alert("Ocurrió un error inesperado");
+        console.log("ERROR: ", e);
+        }
+    });
 
     (function(){
         let pathname = window.location.pathname;
         if(pathname === "/"){
             $(".nav .nav-item a:first").addClass("active");
-        } else if (pathname == "/turnos.html") {
+        } else if (pathname == "/alta-turnos.html") {
             $(".nav .nav-item a:last").addClass("active");
         }
     })();
