@@ -32,4 +32,13 @@ public class Odontologo {
     @OneToMany(mappedBy = "odontologo")
     private Set<Turno> turnos;
 
+    public Odontologo() {
+    }
+
+    public Odontologo(String nombre, String apellido, String matricula) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.matricula = matricula;
+    }
 }

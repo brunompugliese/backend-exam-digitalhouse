@@ -32,4 +32,15 @@ public class Paciente {
    @JsonIgnore
    @OneToMany(mappedBy = "paciente")
     private Set<Turno> turnos;
+
+    public Paciente() {
+    }
+
+    public Paciente(String nombre, String apellido, String dni, String fechaAlta, Domicilio domicilio) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.fechaAlta = fechaAlta;
+        this.domicilio = domicilio;
+    }
 }

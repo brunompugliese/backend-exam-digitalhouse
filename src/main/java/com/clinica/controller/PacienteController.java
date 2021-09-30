@@ -16,7 +16,7 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class PacienteController {
 
-    private Logger logger = Logger.getLogger("It's-a me, Mario!");
+    private final static  Logger logger = Logger.getLogger("It's-a me, Mario!");
 
     @Autowired
     PacienteService pacienteService;

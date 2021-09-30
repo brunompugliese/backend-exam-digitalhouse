@@ -16,7 +16,7 @@ public class DomicilioController {
 
     @Autowired
     DomicilioService domicilioService;
-    private Logger logger = Logger.getLogger("It's-a me, Mario!");
+    private final static  Logger logger = Logger.getLogger("It's-a me, Mario!");
 
     @PostMapping("/")
     public ResponseEntity<Domicilio> registrar(@RequestBody Domicilio domicilio) {
