@@ -4,18 +4,18 @@ $(document).ready(function(){
         try {
             let pacienteId = $("#paciente_id").val();
 
-        let formData = {
-            id: $("#paciente_id").val(),
-            nombre: $("#nombre").val(),
-            apellido:  $("#apellido").val(),
-            dni: $("#dni").val(),
-            fechaAlta: $("#fecha").val(),
-            domicilio: {
-                calle: $("#calle").val(),
-                numero: $("#numero").val(),
-                provincia: $("#provincia").val(),
-            },
-        }
+            let formData = {
+                id: $("#paciente_id").val(),
+                nombre: $("#nombre").val(),
+                apellido:  $("#apellido").val(),
+                dni: $("#dni").val(),
+                fechaAlta: $("#fecha").val(),
+                domicilio: {
+                    calle: $("#calle").val(),
+                    numero: $("#numero").val(),
+                    provincia: $("#provincia").val(),
+                },
+            }
             $.ajax({
                 url: '/api/pacientes/',
                 type: 'PUT',

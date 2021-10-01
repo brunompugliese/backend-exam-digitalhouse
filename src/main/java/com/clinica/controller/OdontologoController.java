@@ -53,14 +53,9 @@ public class OdontologoController {
     }
 
     @DeleteMapping("/{id}")
-    public String borrar(@PathVariable Long id){
-        if(odontologoService.getById(id).isPresent()){
-            logger.debug("Borrando odontólogo particular");
-            odontologoService.borrar(id);
-            return "El odontólogo con id " + id + " se ha eliminado con éxito ";
-        }
-        logger.debug("Falló la petición o el odontólogo no existe");
-        return "No se encontro ningún odontologo con id " + id;
+    public ResponseEntity borrar(@PathVariable Long id) {
+        logger.debug("Se intenta borrar un registro y si falla se arroja una excepción");
+        odontologoService.borrar(id);
+        return ResponseEntity.ok("El odontólogo se ha eliminado con éxito");
     }
-
 }

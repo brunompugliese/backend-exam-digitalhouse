@@ -7,7 +7,7 @@ $(document).ready(function(){
               $.each(response, (i, odontologo) => {
                 let get_More_Info_Btn = '<button' +
                                             ' id=' + '\"' + 'btn_id_' + odontologo.id + '\"' +
-                                            ' type="button" class="btn btn-info btn_id">' + 
+                                            ' type="button" class="btn btn-info btn_id">' +
                                             "Modificar" +
                                             '</button>';
                  let delete_Btn = '<button' +
