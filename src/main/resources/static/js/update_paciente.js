@@ -4,18 +4,19 @@ $(document).ready(function(){
         try {
             let pacienteId = $("#paciente_id").val();
 
-            let formData = {
-                id: $("#paciente_id").val(),
-                nombre: $("#nombre").val(),
-                apellido:  $("#apellido").val(),
-                dni: $("#dni").val(),
-                fechaAlta: $("#fecha").val(),
-                domicilio: {
-                    calle: $("#calle").val(),
-                    numero: $("#numero").val(),
-                    provincia: $("#provincia").val(),
-                },
+        let formData = {
+            id: $("#paciente_id").val(),
+            nombre: $("#nombre").val(),
+            apellido:  $("#apellido").val(),
+            dni: $("#dni").val(),
+            fechaAlta: $("#fecha").val(),
+            domicilio: {
+                id: $("#domicilio_id").val(),
+                calle: $("#calle").val(),
+                numero: $("#numero").val(),
+                provincia: $("#provincia").val()
             }
+        }
             $.ajax({
                 url: '/api/pacientes/',
                 type: 'PUT',
@@ -73,6 +74,8 @@ $(document).ready(function(){
                 $("#nombre").val(paciente.nombre);
                 $("#apellido").val(paciente.apellido);
                 $("#dni").val(paciente.dni);
+                $("#fecha").val(paciente.fechaAlta)
+                $("#domicilio_id").val(paciente.domicilio.id)
                 $("#calle").val(paciente.domicilio.calle);
                 $("#numero").val(paciente.domicilio.numero);
                 $("#provincia").val(paciente.domicilio.provincia);
